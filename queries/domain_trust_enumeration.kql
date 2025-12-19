@@ -1,0 +1,9 @@
+//Domain_Trust_enumeration
+let PostIncidentStart = datetime(2025-11-24);
+let PostIncidentEnd   = datetime(2025-11-30);
+DeviceProcessEvents
+| where Timestamp between (PostIncidentStart .. PostIncidentEnd)
+| where DeviceName == "azuki-adminpc"
+| where AccountName == "yuki.tanaka"
+| where ProcessCommandLine has_any ("Domain", "trusts", "dig", "nltest", "dsquery", "NetDomainTrust", "ADTrust")
+| order by Timestamp desc
