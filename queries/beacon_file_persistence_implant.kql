@@ -1,0 +1,9 @@
+//Beacon_File_Persistence_Implant
+let PostIncidentStart = datetime(2025-11-24);
+let PostIncidentEnd   = datetime(2025-11-30);
+DeviceFileEvents
+| where Timestamp between (PostIncidentStart .. PostIncidentEnd)
+| where DeviceName == "azuki-adminpc"
+| where InitiatingProcessAccountName == "yuki.tanaka"
+| where ActionType == "FileCreated"
+| where FileName  has_any ("ps1", "exe", "bash", "psexec", "net")
