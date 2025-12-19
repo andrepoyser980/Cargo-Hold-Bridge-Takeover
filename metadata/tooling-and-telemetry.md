@@ -8,7 +8,6 @@
 - DeviceFileEvents
 - DeviceNetworkEvents
 - DeviceLogonEvents
-- DeviceRegistryEvents
 - DeviceEvents
 
 ## Analysis Techniques
