@@ -1,0 +1,11 @@
+//Exfiltration_Destination_Server
+let PostIncidentStart = datetime(2025-11-24);
+let PostIncidentEnd   = datetime(2025-11-30);
+DeviceNetworkEvents
+| where Timestamp between (PostIncidentStart .. PostIncidentEnd)
+| where DeviceName == "azuki-adminpc"
+| where InitiatingProcessAccountName == "yuki.tanaka"
+| where ActionType == "ConnectionSuccess"
+| where RemoteUrl contains "gofile.io"
+| where RemoteIPType == "Public"
+| order by Timestamp desc
