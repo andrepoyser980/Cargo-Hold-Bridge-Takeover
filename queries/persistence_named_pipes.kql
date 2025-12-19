@@ -1,0 +1,9 @@
+//Persistence_named_pipes
+let PostIncidentStart = datetime(2025-11-24);
+let PostIncidentEnd   = datetime(2025-11-30);
+DeviceEvents
+| where Timestamp between (PostIncidentStart .. PostIncidentEnd)
+| where DeviceName == "azuki-adminpc"
+| where InitiatingProcessAccountName == "yuki.tanaka"
+| where ActionType == "NamedPipeEvent"
+| where InitiatingProcessCommandLine contains "meterpreter"//since a meterpreter.exe file was created to enable remote access
