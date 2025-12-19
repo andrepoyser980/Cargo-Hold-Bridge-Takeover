@@ -1,0 +1,9 @@
+//Privilege_escalation_account_creation
+let PostIncidentStart = datetime(2025-11-24);
+let PostIncidentEnd   = datetime(2025-11-30);
+DeviceProcessEvents
+| where Timestamp between (PostIncidentStart .. PostIncidentEnd)
+| where DeviceName == "azuki-adminpc"
+| where AccountName == "yuki.tanaka"
+| where ProcessCommandLine has_any ("powershell", "base64", "ps1", "7z", "rar", "encode")
+| order by Timestamp desc 
