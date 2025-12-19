@@ -1,6 +1,6 @@
 **Threat Hunt Report**
 **Bridge Takeover – Executive Endpoint Compromise**
-
+https://github.com/andrepoyser980/Cargo-Hold-Bridge-Takeover/blob/main/images/overview/Bridge%20Takeover.png
 **Azuki Import/Export**
 
 **Executive Summary**
