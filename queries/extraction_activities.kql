@@ -1,0 +1,13 @@
+//Likely_Extraction_Activity
+let PostIncidentStart = datetime(2025-11-24);
+let PostIncidentEnd   = datetime(2025-11-30);
+DeviceProcessEvents
+| where Timestamp between (PostIncidentStart .. PostIncidentEnd)
+| where DeviceName == "azuki-adminpc"
+| extend cmd = tolower(ProcessCommandLine), proc = tolower(FileName)
+| where proc in ("7z.exe","7za.exe","winrar.exe","rar.exe",
+  "tar.exe","expand.exe","powershell.exe","pwsh.exe",
+  "certutil.exe","cmd.exe")
+| where cmd has_any (" -p", " -P", "pass", "password", "pwd", "key", "secret")
+| where cmd has_any ("7z", "7z.exe", " x ", " e ", "extract", "unpack", "expand", "tar -x", "expand.exe") or cmd matches regex @"\b(7z|7za|winrar|rar|tar|expand)\b.*\b(x|e|extract|unpack|xf)\b"
+
