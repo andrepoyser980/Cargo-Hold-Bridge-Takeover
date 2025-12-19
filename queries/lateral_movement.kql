@@ -1,0 +1,11 @@
+
+//Lateral_Movement
+let PostIncidentStart = datetime(2025-11-24);
+let PostIncidentEnd   = datetime(2025-11-30);
+DeviceLogonEvents
+| where Timestamp between (PostIncidentStart .. PostIncidentEnd)
+| where LogonType == "RemoteInteractive"
+| where tolower(DeviceName) contains ("admin")
+| project Timestamp, DeviceName, AccountName, ActionType, RemoteIP, RemotePort, LogonType, IsLocalAdmin
+| order by Timestamp desc
+
