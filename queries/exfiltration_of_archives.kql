@@ -1,0 +1,10 @@
+//Exfiltration_of_Archives
+let PostIncidentStart = datetime(2025-11-24);
+let PostIncidentEnd   = datetime(2025-11-30);
+DeviceProcessEvents
+| where Timestamp between (PostIncidentStart .. PostIncidentEnd)
+| where DeviceName == "azuki-adminpc"
+| where AccountName == "yuki.tanaka"
+| where ProcessCommandLine has_any ("HTTPS", "POST", "upload", "curl", "xcopy")
+| project Timestamp, ActionType, FileName, ProcessCommandLine, FolderPath, InitiatingProcessCommandLine, InitiatingProcessRemoteSessionDeviceName
+| order by Timestamp desc
