@@ -1,0 +1,9 @@
+//Exfiltration_Volume
+let PostIncidentStart = datetime(2025-11-24);
+let PostIncidentEnd   = datetime(2025-11-30);
+DeviceFileEvents
+| where Timestamp between (PostIncidentStart .. PostIncidentEnd)
+| where ActionType == "FileCreated"
+| where FolderPath contains @"C:\ProgramData\Microsoft\Crypto\staging"
+| where FileName has_any ("7z", "zip", ".gz", ".rar", ".tar", "winrar")
+| summarize count()by FileName
