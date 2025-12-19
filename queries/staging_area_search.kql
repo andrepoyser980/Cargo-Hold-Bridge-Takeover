@@ -1,0 +1,22 @@
+//Device_Staging_area_search
+let Start = datetime(2025-11-24);
+let End   = datetime(2025-11-30);
+let AdminPC = "azuki-adminpc";
+let SourceIP = "10.1.0.204";
+let WindowAfterLogon = 45m;
+let RdpLogons =
+DeviceLogonEvents
+| where Timestamp between (Start .. End)
+| where tolower(DeviceName) == tolower(AdminPC)
+| where LogonType == "RemoteInteractive"
+| where RemoteIP == SourceIP
+| project DeviceId, LogonTime = Timestamp;
+RdpLogons
+| join kind=inner (
+    DeviceNetworkEvents
+    | where Timestamp between (Start .. End)
+    | where ActionType == "ConnectionSuccess"
+    | where RemoteIPType == "Public" 
+    | extend Domain = tolower(tostring(parse_url(RemoteUrl).Host))
+    ) on DeviceId
+| where Timestamp  between (LogonTime .. LogonTime + WindowAfterLogon)
